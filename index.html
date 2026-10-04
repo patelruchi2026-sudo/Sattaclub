@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lucky Slots Demo</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: #111827;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .game {
+      width: 95%;
+      max-width: 420px;
+      text-align: center;
+      background: #1f2937;
+      padding: 25px 15px;
+      border-radius: 20px;
+    }
+
+    h1 { margin-top: 0; }
+
+    .balance {
+      margin: 15px 0;
+      font-size: 20px;
+    }
+
+    .slots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 25px 0;
+    }
+
+    .slot {
+      width: 90px;
+      height: 90px;
+      background: white;
+      color: black;
+      border-radius: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 45px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 12px;
+      padding: 15px 35px;
+      font-size: 20px;
+      font-weight: bold;
+      background: #22c55e;
+      color: white;
+    }
+
+    #message {
+      min-height: 28px;
+      margin-top: 20px;
+      font-size: 18px;
+    }
+
+    .note {
+      margin-top: 20px;
+      font-size: 12px;
+      opacity: .7;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="game">
+    <h1>🎰 Lucky Slots</h1>
+
+    <div class="balance">
+      Demo Coins: <span id="balance">1000</span>
+    </div>
+
+    <div class="slots">
+      <div class="slot" id="slot1">🍒</div>
+      <div class="slot" id="slot2">🍋</div>
+      <div class="slot" id="slot3">🍊</div>
+    </div>
+
+    <button onclick="spin()">SPIN</button>
+
+    <div id="message">Spin करके देखो!</div>
+
+    <div class="note">
+      Demo game — कोई real-money betting या withdrawal नहीं।
+    </div>
+  </div>
+
+  <script>
+    let balance = 1000;
+
+    const symbols = ["🍒", "🍋", "🍊", "🍇", "⭐", "7️⃣"];
+
+    function spin() {
+      if (balance < 10) {
+        document.getElementById("message").innerText =
+          "Demo coins खत्म हो गए!";
+        return;
+      }
+
+      balance -= 10;
+
+      let a = symbols[Math.floor(Math.random() * symbols.length)];
+      let b = symbols[Math.floor(Math.random() * symbols.length)];
+      let c = symbols[Math.floor(Math.random() * symbols.length)];
+
+      document.getElementById("slot1").innerText = a;
+      document.getElementById("slot2").innerText = b;
+      document.getElementById("slot3").innerText = c;
+
+      let message = "Try again!";
+
+      if (a === b && b === c) {
+        balance += 100;
+        message = "🎉 JACKPOT! +100 Demo Coins";
+      } else if (a === b || b === c || a === c) {
+        balance += 20;
+        message = "👍 Pair! +20 Demo Coins";
+      }
+
+      document.getElementById("balance").innerText = balance;
+      document.getElementById("message").innerText = message;
+    }
+  </script>
+</body>
+  </html>
